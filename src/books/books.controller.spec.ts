@@ -3,6 +3,7 @@ import { BooksController } from './books.controller';
 import { AuthorsService } from 'src/authors/authors.service';
 import { BooksService } from './books.service';
 import { PublishersService } from 'src/publishers/publishers.service';
+import { GenresService } from 'src/genres/genres.service';
 
 describe('BooksController', () => {
   let controller: BooksController;
@@ -10,7 +11,7 @@ describe('BooksController', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [BooksController],
-      providers: [BooksService, AuthorsService, PublishersService]
+      providers: [BooksService, AuthorsService, PublishersService, GenresService]
     }).compile();
 
     controller = module.get<BooksController>(BooksController);
