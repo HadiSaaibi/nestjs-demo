@@ -35,8 +35,13 @@ export class BooksService {
     private readonly genresService: GenresService
   ) {}
 
-    findAll() {
-      return this.books;
+    findAll(includeAuthor = false) {
+      if (!includeAuthor) return this.books;
+
+      return this.books.map((book) => {
+        const author = this.authorsService.findOne(book.authorId);
+        return {...book, author}
+      })
     }
   
     findOne(id: number) {
