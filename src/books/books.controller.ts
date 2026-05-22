@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, Query } from '@nestjs/common';
 import { BooksService } from './books.service';
 
 @Controller('books')
@@ -11,8 +11,8 @@ export class BooksController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.booksService.findOne(+id);
+  findOne(@Param('id', ParseIntPipe) id: number) {
+    return this.booksService.findOne(id);
   }
 
   @Post()
@@ -22,14 +22,14 @@ export class BooksController {
 
   @Patch(':id')
   update(
-    @Param('id') id: string,
+    @Param('id', ParseIntPipe) id: number,
     @Body() bookUpdate: { title?: string; authorId?: number; publisherId?: number; genreIds?: number[] },
   ) {
-    return this.booksService.update(+id, bookUpdate);
+    return this.booksService.update(id, bookUpdate);
   }
 
   @Delete(':id')
-  delete(@Param('id') id: string) {
-    return this.booksService.delete(+id);
+  delete(@Param('id', ParseIntPipe) id: number) {
+    return this.booksService.delete(id);
   }
 }
