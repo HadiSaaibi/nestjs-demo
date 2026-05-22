@@ -16,14 +16,14 @@ export class BooksController {
   }
 
   @Post()
-  create(@Body() book: { title: string; authorId: number }) {
+  create(@Body() book: { title: string; authorId: number; publisherId: number  }) {
     return this.booksService.create(book);
   }
 
   @Patch(':id')
   update(
     @Param('id') id: string,
-    @Body() bookUpdate: { title?: string; authorId?: number },
+    @Body() bookUpdate: { title?: string; authorId?: number; publisherId?: number  },
   ) {
     return this.booksService.update(+id, bookUpdate);
   }
